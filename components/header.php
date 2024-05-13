@@ -1,10 +1,21 @@
 <?php
-// session_start();
+/*
+|--------------------------------------------------------------------------
+| User Authentication and Navigation
+|--------------------------------------------------------------------------
+*/
+
 $logged_in = isset($_SESSION['user_id']);
 $link_url = $logged_in ? "profile.php" : "login.php";
 $user_id = $logged_in ? $_SESSION['user_id'] : "";
 $icon_class = $logged_in ? "bi bi-person-circle" : "bi bi-box-arrow-right";
 $btn_text = $logged_in ? "profile" : "login";
+
+/*
+|--------------------------------------------------------------------------
+| Header Navigation
+|--------------------------------------------------------------------------
+*/
 ?>
 
 <!-- Header  -->
@@ -23,7 +34,7 @@ $btn_text = $logged_in ? "profile" : "login";
                     <?php
                     if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'recruiter') { ?>
                         <li class="nav-item">
-                            <a class="nav-link link-secondary fw-bold fs-6 py-2" href="#">Post a Job</a>
+                            <a class="nav-link link-secondary fw-bold fs-6 py-2" href="post-job.php">Post a Job</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link link-secondary fw-bold fs-6 py-2" href="./recruiter-posts.php">MY Posts</a>

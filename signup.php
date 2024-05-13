@@ -1,72 +1,6 @@
 <?php
 session_start();
-
-if (isset($_SESSION['user_id'])) {
-    $redirect_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'index.php';
-    header("Location: $redirect_url");
-    exit;
-}
-
-require 'database/config.php';
-require 'Auth/UserRegistration.php';
-require 'Traits/ValidatorTrait.php';
-
-class DatabaseOperations
-{
-    use ValidatorTrait;
-
-    private $conn;
-
-    public function __construct($conn)
-    {
-        $this->conn = $conn;
-    }
-
-    public function validateFormData($data)
-    {
-        $rules = [
-            'name' => 'required|string|max:45',
-            'email' => 'required|email|max:255',
-            'password' => 'required|string|min:8',
-            'confirm_password' => 'required|string|min:8',
-            'phone' => 'nullable|string|max:11|min:11',
-        ];
-
-        return $this->validateRequestData($data, $rules);
-    }
-}
-
-
-$databaseOperations = new DatabaseOperations($conn);
-$userRegistration = new UserRegistration($conn);
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
-    $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
-    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
-    $role = 'employee';
-
-    $data = [
-        "name" => $name,
-        "email" => $email,
-        "password" => $password,
-        "confirm_password" => $confirm_password,
-        "role" => $role,
-        "phone" => $phone
-    ];
-
-    $result = $databaseOperations->validateFormData($data);
-    if (!$result) {
-        $response  = $userRegistration->registerUser('users', $data);
-        if ($response == 200) {
-            header("Location: index.php");
-            exit;
-        }
-    }
-}
-
+include("controller/Auth/SignupEmployeeController.php");
 ?>
 
 <!DOCTYPE html>
@@ -79,53 +13,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <div class="container-xxl bg-white p-0">
-        <!-- Spinner Start -->
+        <!-- Spinner -->
         <?php require_once 'components/spinner.php'; ?>
-
-        <div class="form-box">
-            <div class="login-container" id="login">
-                <div class="top">
-                    <span>Already have an account? <a href="login.php">Sign In</a></span>
-                    <header>Sign Up</header>
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg w-100 bg-primary navbar-light shadow sticky-top p-0">
+            <a href="index.php" class="navbar-brand w-100 d-flex align-items-center text-center py-0 px-4 px-lg-5">
+                <h1 class="m-0 text-white">Tech Jobs</h1>
+            </a>
+        </nav>
+        <div class="form-container h-100">
+            <div class="login-container text-center" id="login">
+                <div class="top p-3 m-auto">
+                    <span>Already have an account? <a href="login.php" class="text-primary">Login</a></span>
+                    <header class="fs-3">Sign Up</header>
                 </div>
-                <form method="post" action="signup.php">
-                    <div class="input-box">
-                        <input type="text" class="input-field" name="name" placeholder="Full Name">
+                <form method="post" action="signup.php" class="body-form" enctype="multipart/form-data">
+                    <div class="form-box-section">
+                        <input type="text" class="input-field input-form" name="name" id="name" placeholder=" ">
+                        <label for="name">Full Name</label>
                         <i class="bx bx-user"></i>
                     </div>
-                    <div class="input-box">
-                        <input type="email" class="input-field" name="email" placeholder="Email">
+                    <div class="form-box-section">
+                        <input type="email" class="input-field input-form" name="email" id="email" placeholder=" ">
+                        <label for="email">Email</label>
                         <i class="bx bx-mail-send"></i>
                     </div>
-                    <div class="input-box">
-                        <input type="password" name="password" class="input-field" placeholder="Password">
+                    <div class="form-box-section">
+                        <input type="password" name="password" class="input-field input-form" id="password" placeholder=" ">
+                        <label for="password">Password</label>
                         <i class="bx bx-lock-alt"></i>
                     </div>
-                    <div class="input-box">
-                        <input type="password" name="confirm_password" class="input-field" placeholder="Confirm Password">
+                    <div class="form-box-section">
+                        <input type="password" name="confirm_password" class="input-field input-form" id="confirm_password" placeholder=" ">
+                        <label for="confirm_password">Confirm Password</label>
                         <i class="bx bx-lock-alt"></i>
                     </div>
-                    <div class="input-box">
-                        <input type="tel" name="phone" class="input-field" placeholder="Phone">
+                    <div class="form-box-section">
+                        <input type="file" class="input-field input-form" name="image" id="image" placeholder=" ">
+                        <label for="image">Profile Photo</label>
+                        <i class="bx bx-use"></i>
+                    </div>
+                    <div class="form-box-section">
+                        <input type="tel" name="phone" class="input-field input-form" id="phone" placeholder=" ">
+                        <label for="phone">Phone</label>
                         <i class="bx bxs-phone"></i>
                     </div>
-                    <div class="input-box">
-                        <input type="submit" class="submit" name="signup" value="Sign Up">
+                    <div class="form-box-section">
+                        <input type="submit" class="submit btn btn-primary" name="signup" value="Sign Up">
                     </div>
                 </form>
-                <?php
-                if (isset($result)) {
-                    $errors = json_decode($result, true);
-                    if (!empty($errors['error'])) {
-                        echo '<div class="alert alert-danger p-1 m-2 alert-dismissible fade show" role="alert" data-wow-duration="1s" data-wow-delay="0.5s" data-wow-offset="100">';
-                        echo '<button type="button" class="btn-close p-2" data-bs-dismiss="alert" aria-label="Close"></button>';
-                        foreach ($errors['error'] as $field => $error) {
-                            echo "<strong>$field:</strong> $error<br>";
-                        }
-                        echo '</div>';
-                    }
-                }
-                ?>
+                <?php ErrorHandler::displayErrors($error_messages); ?>
+                <?php ErrorHandler::displayErrors($result); ?>
+            </div>
+            <!-- footer -->
+            <div class="container-fluid bg-dark text-white-50 footer mt-3 wow fadeIn" data-wow-delay="0.1s">
+                <div class="container">
+                    <div class="copyright">
+                        <div class="row">
+                            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                                <a href="./team" class="copyling-link">&copy; Developer by<span class="team-span"> EgyTech</span> Team</a>
+                            </div>
+                            <div class="col-md-6 text-center text-md-end">
+                                <div class="footer-menu">
+                                    <a href="index.php">Home</a>
+                                    <a href="cookies.php">Cookies</a>
+                                    <a href="FQAs.php">FQAs</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <?php require_once 'components/scripts.php'; ?>

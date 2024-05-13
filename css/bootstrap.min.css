@@ -24,7 +24,7 @@
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
   --bs-danger: #dc3545;
-  --bs-light: #effdf5;
+  --bs-light: #eff5fd;
   --bs-dark: #2b3940;
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
@@ -1987,12 +1987,12 @@ textarea.form-control-lg {
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 16px 12px;
-  border: 1px solid #ced4da;
+  /* border: 1px solid #ced4da; */
   border-radius: 2px;
   appearance: none;
 }
 .form-select:focus {
-  border-color: #499ee0c8;
+  /* border-color: #499ee0c8; */
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(229, 86, 4, 0.427);
 }
@@ -10032,3 +10032,5 @@ fieldset:disabled .btn {
     display: none !important;
   }
 }
+
+

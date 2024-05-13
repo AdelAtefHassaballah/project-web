@@ -30,10 +30,10 @@ function checkPermission($userId, $requiredRole)
 }
 
 // Using
-$userId = $_SESSION['user_id']; 
-if (checkPermission($userId, 'editor')) {
-    echo "You have the required permission.";
-} else {
-    echo "You don't have the required permission.";
-}
+// $userId = $_SESSION['user_id']; 
+// if (checkPermission($userId, 'editor')) {
+//     echo "You have the required permission.";
+// } else {
+//     echo "You don't have the required permission.";
+// }
 ?>

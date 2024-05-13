@@ -10,9 +10,9 @@
 
 <body>
     <div class="container-xxl bg-white p-0">
-        <!-- Spinner Start -->
+        <!-- Spinner -->
         <?php require_once 'components/spinner.php'; ?>
-        <!-- Navbar Start -->
+        <!-- Navbar -->
         <?php require_once 'components/navbar.php'; ?>
 
         <div class="container-xxl py-5 bg-dark page-header">
@@ -28,10 +28,10 @@
             </div>
         </div>
 
-        <!-- Category Start -->
+        <!-- Category -->
         <?php require_once 'components/category.php'; ?>
 
-        <!-- About Start -->
+        <!-- About -->
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="row g-5 align-items-center">

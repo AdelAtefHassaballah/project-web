@@ -9,12 +9,12 @@
 
 <body>
     <div class="container-xxl bg-white p-0">
-        <!-- Spinner Start -->
+        <!-- Spinner -->
         <?php require_once 'components/spinner.php'; ?>
-        <!-- Navbar Start -->
+        <!-- Navbar -->
         <?php require_once 'components/navbar.php'; ?>
 
-        <!-- Contact Start -->
+        <!-- Contact -->
         <div class="container-xxl py-5">
             <div class="container">
                 <h1>Frequently Asked Questions</h1>

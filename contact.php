@@ -8,12 +8,12 @@
 
 <body>
     <div class="container-xxl bg-white p-0">
-        <!-- Spinner Start -->
+        <!-- Spinner -->
         <?php require_once 'components/spinner.php';?>
-        <!-- Navbar Start -->
+        <!-- Navbar -->
         <?php require_once 'components/navbar.php';?>
 
-        <!-- Contact Start -->
+        <!-- Contact -->
         <div class="container-xxl py-5">
             <div class="container">
                 <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Contact For Any Query</h1>
@@ -25,7 +25,7 @@
                                     <div class="bg-white border rounded d-flex flex-shrink-0 align-items-center justify-content-center me-3" style="width: 45px; height: 45px;">
                                         <i class="fa fa-map-marker-alt text-primary"></i>
                                     </div>
-                                    <span>123 Street, New York, USA</span>
+                                    <span>917 Alexandria, Egypt</span>
                                 </div>
                             </div>
                             <div class="col-md-4 wow fadeIn" data-wow-delay="0.3s">
@@ -33,7 +33,7 @@
                                     <div class="bg-white border rounded d-flex flex-shrink-0 align-items-center justify-content-center me-3" style="width: 45px; height: 45px;">
                                         <i class="fa fa-envelope-open text-primary"></i>
                                     </div>
-                                    <span>info@example.com</span>
+                                    <span>info@EgyTech.com</span>
                                 </div>
                             </div>
                             <div class="col-md-4 wow fadeIn" data-wow-delay="0.5s">
@@ -91,8 +91,6 @@
                 </div>
             </div>
         </div>
-        <!-- Contact End -->
-
         <?php require_once 'components/footer.php'; ?>
     </div>
     <?php require_once 'components/scripts.php'; ?>

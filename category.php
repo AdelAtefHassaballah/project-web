@@ -6,10 +6,18 @@ require_once 'Traits/CrudOperationsTrait.php';
 class organizationCompanies
 {
     use CrudOperationsTrait;
-
     public function getCompaniesByCategory($category)
     {
-        return $this->getByCategory('companies', 'category', $category);
+        $sql = "SELECT * FROM companies WHERE category = ?";
+        $stmt = $this->connection->prepare($sql);
+
+        if (!$stmt) {
+            die("Error in SQL statement: " . $this->connection->error);
+        }
+        $stmt->bind_param("s", $category);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result;
     }
 }
 
@@ -53,9 +61,9 @@ if ($category) {
                                     <h5 class="mb-1"><?php echo $company['name']; ?></h5>
                                     <small><?php echo $company['category']; ?></small>
                                 </div>
-                                <p><?php echo $company['description']; ?></p>
+                                <p style="max-height: 69px !important; overflow: hidden;"><?php echo $company['description']; ?></p>
                                 <div class="position-absolute bottom-0 start-50 translate-middle-x p-2 w-100">
-                                    <a class="btn btn-primary btn-sm-hover btn-testimonial" href="job-detail.php?id=<?php echo $company['id'] ?>">View</a>
+                                    <a class="btn btn-primary btn-sm-hover btn-testimonial" href="company-detail.php?companyId=<?php echo $company['id'] ?>">View</a>
                                 </div>
                             </div>
                         </div>

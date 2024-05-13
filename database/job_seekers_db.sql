@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2024 at 12:45 PM
+-- Generation Time: May 13, 2024 at 09:19 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -53,6 +53,16 @@ CREATE TABLE `applications` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `applications`
+--
+
+INSERT INTO `applications` (`id`, `type`, `user_id`, `job_posting_id`, `created_at`, `updated_at`) VALUES
+(1, 'part time', 1, 10, '2024-05-13 18:17:29', '2024-05-13 18:17:29'),
+(2, 'full time', 3, 10, '2024-05-13 18:18:32', '2024-05-13 18:18:32'),
+(3, 'part time', 3, 12, '2024-05-13 18:19:00', '2024-05-13 18:19:00'),
+(4, 'part time', 1, 9, '2024-05-13 18:19:33', '2024-05-13 18:19:33');
+
 -- --------------------------------------------------------
 
 --
@@ -81,7 +91,7 @@ CREATE TABLE `companies` (
   `description` text NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `category` enum('Web Development','UI/UX Design','App Development','Software Development','Database Administration','Network Engineering','Embedded Systems','IoT') DEFAULT NULL,
-  `location` ENUM('Alexandria', 'Aswan', 'Asyut', 'Beheira', 'Beni Suef', 'Cairo', 'Dakahlia', 'Damietta', 'Faiyum', 'Gharbia', 'Giza', 'Ismailia', 'Kafr El Sheikh', 'Luxor', 'Matruh', 'Minya', 'Monufia', 'New Valley', 'North Sinai', 'Port Said', 'Qalyubia', 'Qena', 'Red Sea', 'Sharqia', 'Sohag', 'South Sinai', 'Suez') DEFAULT NULL,
+  `location` enum('Alexandria','Aswan','Asyut','Beheira','Beni Suef','Cairo','Dakahlia','Damietta','Faiyum','Gharbia','Giza','Ismailia','Kafr El Sheikh','Luxor','Matruh','Minya','Monufia','New Valley','North Sinai','Port Said','Qalyubia','Qena','Red Sea','Sharqia','Sohag','South Sinai','Suez') DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
@@ -94,8 +104,8 @@ CREATE TABLE `companies` (
 --
 
 INSERT INTO `companies` (`id`, `name`, `description`, `image`, `category`, `location`, `email`, `phone`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'Software Solutions Co.', 'Providing cutting-edge software solutions', NULL, 'Web Development', 'Alexandria, Exampleville', 'contact@softwaresolutions.com', '123456789', 3, '2024-05-05 10:38:14', '2024-05-05 10:38:14'),
-(2, 'Web Experts Ltd.', 'Experts in web development and design', NULL, 'UI/UX Design', 'Beheira', 'contact@webexperts.com', '987654321', 1, '2024-05-05 10:38:14', '2024-05-05 10:38:14');
+(3, 'IT-CLUB', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 'img/66425431cca07_itclub (1).png', 'Software Development', 'Alexandria', 'IT-CLUB@gmail.com', '01002888377', 2, '2024-05-13 17:56:01', '2024-05-13 17:56:01'),
+(4, '3-p0ox', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 'img/66425a51cb766_6642508e8b490_download.jpg', 'App Development', 'Giza', '3p0x@gmail.com', '01027981725', 4, '2024-05-13 18:22:09', '2024-05-13 18:22:09');
 
 -- --------------------------------------------------------
 
@@ -123,13 +133,12 @@ CREATE TABLE `job_postings` (
 --
 
 INSERT INTO `job_postings` (`id`, `title`, `description`, `salary`, `status`, `type`, `category`, `image`, `user_id`, `company_id`, `created_at`, `updated_at`) VALUES
-(1, 'Junour Software Engineer', 'We are looking for an experienced software engineer to join our team.', 75000, 1, 'part time', 'Software Development', NULL, 1, 1, '2024-05-05 10:40:11', '2024-05-05 10:40:11'),
-(2, 'Senior Software Engineer', 'We are looking for an experienced software engineer to join our team.', 75000, 1, 'full time', 'Software Development', NULL, 1, 1, '2024-05-05 10:40:11', '2024-05-05 10:40:11'),
-(3, 'Web Developer', 'Join our team to work on exciting web development projects.', 60000, 1, 'full time', 'Web Development', NULL, 2, 2, '2024-05-05 10:40:11', '2024-05-05 10:40:11'),
-(4, 'Data Analyst', 'We need a skilled data analyst to analyze our data and provide insights.', 65000, 1, 'full time', 'Database Administration', NULL, 3, 1, '2024-05-05 10:40:11', '2024-05-05 10:40:11'),
-(5, 'Senior Software Engineer', 'We are looking for an experienced software engineer to join our team.', 75000, 1, 'full time', 'Software Development', NULL, 1, 1, '2024-05-05 10:42:00', '2024-05-05 10:42:00'),
-(6, 'Web Developer', 'Join our team to work on exciting web development projects.', 60000, 1, 'full time', 'Web Development', NULL, 2, 2, '2024-05-05 10:42:00', '2024-05-05 10:42:00'),
-(7, 'Data Analyst', 'We need a skilled data analyst to analyze our data and provide insights.', 65000, 1, 'part time', 'Database Administration', NULL, 3, 1, '2024-05-05 10:42:00', '2024-05-05 10:42:00');
+(8, 'LARAVEL DEVELOPER', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 12000, 1, 'part time', 'Web Development', 'img/664254d4d9eae_.laravel.jpg', 2, 3, '2024-05-13 17:58:44', '2024-05-13 17:58:44'),
+(9, 'Flutter Developer', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 17000, 1, 'full time', 'App Development', 'img/664256f6ce407_تطبييق.png', 2, 3, '2024-05-13 18:07:50', '2024-05-13 18:07:50'),
+(10, 'Python Developer', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 22000, 1, 'full time', 'IoT', 'img/664257a0c3848_istockphoto-1221006408-612x612.png', 2, 3, '2024-05-13 18:10:40', '2024-05-13 18:10:40'),
+(11, 'Full Stack Web Developer', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 7000, 1, 'part time', 'Web Development', 'img/66425ac6eeeaf_Developer activity-bro.png', 4, 4, '2024-05-13 18:24:06', '2024-05-13 18:24:06'),
+(12, 'Figma Designer', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 220000, 1, 'full time', 'UI/UX Design', 'img/66425b134b241_UIUXDesign.png', 4, 4, '2024-05-13 18:25:23', '2024-05-13 18:25:23'),
+(13, 'Front-end Developer', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 6000, 1, 'part time', 'Web Development', 'img/66425b9dbdf9b_webDeveloper.jpg', 4, 4, '2024-05-13 18:27:41', '2024-05-13 18:27:41');
 
 -- --------------------------------------------------------
 
@@ -151,11 +160,26 @@ CREATE TABLE `job_requirements` (
 --
 
 INSERT INTO `job_requirements` (`id`, `title`, `description`, `job_posting_id`, `created_at`, `updated_at`) VALUES
-(2, 'Bachelor\'s Degree in Computer Science', 'A Bachelor\'s degree in Computer Science or related field is required.', 2, '2024-05-05 10:40:36', '2024-05-05 10:40:36'),
-(3, '3+ Years of Experience', 'Minimum 3 years of experience in software development.', 2, '2024-05-05 10:40:36', '2024-05-05 10:40:36'),
-(4, 'Proficiency in Java and Python', 'Strong proficiency in Java and Python programming languages.', 2, '2024-05-05 10:40:36', '2024-05-05 10:40:36'),
-(5, 'Experience with Web Development Frameworks', 'Experience with frameworks like Django or Spring is a plus.', 3, '2024-05-05 10:40:36', '2024-05-05 10:40:36'),
-(6, 'Strong Analytical Skills', 'Ability to analyze complex data sets and derive meaningful insights.', 4, '2024-05-05 10:40:36', '2024-05-05 10:40:36');
+(10, 'PHP', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 8, '2024-05-13 17:58:44', '2024-05-13 17:58:44'),
+(11, 'MYSQL', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 8, '2024-05-13 17:58:44', '2024-05-13 17:58:44'),
+(12, 'OOP', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 8, '2024-05-13 17:58:44', '2024-05-13 17:58:44'),
+(13, 'Dart', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 9, '2024-05-13 18:07:50', '2024-05-13 18:07:50'),
+(14, 'Flutter', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 9, '2024-05-13 18:07:50', '2024-05-13 18:07:50'),
+(15, 'Python', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 10, '2024-05-13 18:10:40', '2024-05-13 18:10:40'),
+(16, 'OOP', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 10, '2024-05-13 18:10:40', '2024-05-13 18:10:40'),
+(17, 'Micro Python', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 10, '2024-05-13 18:10:40', '2024-05-13 18:10:40'),
+(18, 'C Arduino', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 10, '2024-05-13 18:10:40', '2024-05-13 18:10:40'),
+(19, 'THML', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 11, '2024-05-13 18:24:06', '2024-05-13 18:24:06'),
+(20, 'CSS, BOOTSTRAP, TAILWIND', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 11, '2024-05-13 18:24:07', '2024-05-13 18:24:07'),
+(21, 'JAVA SCRIPT', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 11, '2024-05-13 18:24:07', '2024-05-13 18:24:07'),
+(22, 'PHP, LARAVEL', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 11, '2024-05-13 18:24:07', '2024-05-13 18:24:07'),
+(23, 'MYSQL', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 11, '2024-05-13 18:24:07', '2024-05-13 18:24:07'),
+(24, 'Figma', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 12, '2024-05-13 18:25:23', '2024-05-13 18:25:23'),
+(25, '', '', 12, '2024-05-13 18:25:23', '2024-05-13 18:25:23'),
+(26, 'HTML', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 13, '2024-05-13 18:27:41', '2024-05-13 18:27:41'),
+(27, 'CSS, SASS', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 13, '2024-05-13 18:27:41', '2024-05-13 18:27:41'),
+(28, 'REACT JS', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 13, '2024-05-13 18:27:41', '2024-05-13 18:27:41'),
+(29, 'JS', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at repudiandae, voluptas adipisci eveniet sapiente aspernatur! Animi, culpa eligendi doloribus iusto nostrum, quibusdam sequi nulla commodi, maiores quas veritatis nisi.', 13, '2024-05-13 18:27:41', '2024-05-13 18:27:41');
 
 -- --------------------------------------------------------
 
@@ -165,13 +189,38 @@ INSERT INTO `job_requirements` (`id`, `title`, `description`, `job_posting_id`, 
 
 CREATE TABLE `social_links` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` ENUM('facebook', 'twitter', 'linkedin', 'instagram', 'youtube', 'snapchat', 'whatsapp', 'tiktok', 'pinterest') NOT NULL,
+  `name` enum('facebook','twitter','linkedin','instagram','youtube','snapchat','whatsapp','tiktok','pinterest') NOT NULL,
   `url` varchar(255) NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `company_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `social_links`
+--
+
+INSERT INTO `social_links` (`id`, `name`, `url`, `user_id`, `company_id`, `created_at`, `updated_at`) VALUES
+(1, 'facebook', 'https://www.facebook.com/unsupportedbrowser', 4, NULL, NULL, NULL),
+(2, 'linkedin', 'https://www.facebook.com/unsupportedbrowser', 4, NULL, NULL, NULL),
+(3, 'instagram', 'https://www.facebook.com/unsupportedbrowser', 4, NULL, NULL, NULL),
+(4, 'facebook', 'https://www.facebook.com/unsupportedbrowser', 1, NULL, NULL, NULL),
+(5, 'youtube', 'https://www.facebook.com/unsupportedbrowser', 1, NULL, NULL, NULL),
+(6, 'twitter', 'https://www.facebook.com/unsupportedbrowser', 1, NULL, NULL, NULL),
+(7, 'facebook', 'https://www.facebook.com/unsupportedbrowser', 2, NULL, NULL, NULL),
+(8, 'linkedin', 'https://www.facebook.com/unsupportedbrowser', 2, NULL, NULL, NULL),
+(9, 'instagram', 'https://www.facebook.com/unsupportedbrowser', 2, NULL, NULL, NULL),
+(10, 'snapchat', 'https://www.facebook.com/unsupportedbrowser', 3, NULL, NULL, NULL),
+(11, 'facebook', 'https://www.facebook.com/unsupportedbrowser', 3, NULL, NULL, NULL),
+(12, 'facebook', 'https://www.facebook.com/unsupportedbrowser', NULL, 3, NULL, NULL),
+(13, 'linkedin', 'https://www.facebook.com/unsupportedbrowser', NULL, 3, NULL, NULL),
+(14, 'instagram', 'https://www.facebook.com/unsupportedbrowser', NULL, 3, NULL, NULL),
+(15, 'youtube', 'https://www.facebook.com/unsupportedbrowser', NULL, 3, NULL, NULL),
+(16, 'whatsapp', 'https://www.facebook.com/unsupportedbrowser', NULL, 3, NULL, NULL),
+(17, 'facebook', 'https://www.facebook.com/unsupportedbrowser', NULL, 4, NULL, NULL),
+(18, 'twitter', 'https://www.facebook.com/unsupportedbrowser', NULL, 4, NULL, NULL),
+(19, 'linkedin', 'https://www.facebook.com/unsupportedbrowser', NULL, 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -198,9 +247,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `status`, `image`, `phone`, `user_details_id`, `created_at`, `updated_at`) VALUES
-(1, 'John Doe', 'john.doe@example.com', 'johnspassword', 'employee', 1, NULL, '123456789', 1, '2024-05-05 10:35:42', '2024-05-05 10:35:42'),
-(2, 'Jane Smith', 'jane.smith@example.com', 'janespassword', 'recruiter', 1, NULL, '987654321', 2, '2024-05-05 10:35:42', '2024-05-05 10:35:42'),
-(3, 'Michael Johnson', 'michael.johnson@example.com', 'michaelspassword', 'employee', 1, NULL, '555555555', 3, '2024-05-05 10:35:42', '2024-05-05 10:35:42');
+(1, 'John Doe', 'john.doe@example.com', '$2y$10$AV8NfbM0kW4Vx62O5klFZ.et/1iaFd2qB5mL/a48yZ27pSZNkYPmS', 'employee', 1, 'img/profile_picture.png', '01500403927', 1, '2024-05-05 10:35:42', '2024-05-05 10:35:42'),
+(2, 'Jane Smith', 'jane.smith@example.com', '$2y$10$AV8NfbM0kW4Vx62O5klFZ.et/1iaFd2qB5mL/a48yZ27pSZNkYPmS', 'recruiter', 1, 'img/profile_picture.png', '01206403927', 2, '2024-05-05 10:35:42', '2024-05-05 10:35:42'),
+(3, 'Michael Johnson', 'michael.johnson@example.com', '$2y$10$AV8NfbM0kW4Vx62O5klFZ.et/1iaFd2qB5mL/a48yZ27pSZNkYPmS', 'employee', 1, 'img/profile_picture.png', '01006805927', 3, '2024-05-05 10:35:42', '2024-05-05 10:35:42'),
+(4, 'ziad hassan', 'ziadabaza12345@gmail.com', '$2y$10$zuos77XvdBj.tA/jJio4q.7F4Iloz/8gAcFHcP8lAAIDPEc4GAXIO', 'recruiter', 1, 'img/66425a1643cd9_ziad_hassan.jpg', '01006403927', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -211,7 +261,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `status`, `image
 CREATE TABLE `user_details` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `specialization` varchar(255) DEFAULT NULL,
-  `location` ENUM('Alexandria', 'Aswan', 'Asyut', 'Beheira', 'Beni Suef', 'Cairo', 'Dakahlia', 'Damietta', 'Faiyum', 'Gharbia', 'Giza', 'Ismailia', 'Kafr El Sheikh', 'Luxor', 'Matruh', 'Minya', 'Monufia', 'New Valley', 'North Sinai', 'Port Said', 'Qalyubia', 'Qena', 'Red Sea', 'Sharqia', 'Sohag', 'South Sinai', 'Suez') DEFAULT NULL,
+  `location` enum('Alexandria','Aswan','Asyut','Beheira','Beni Suef','Cairo','Dakahlia','Damietta','Faiyum','Gharbia','Giza','Ismailia','Kafr El Sheikh','Luxor','Matruh','Minya','Monufia','New Valley','North Sinai','Port Said','Qalyubia','Qena','Red Sea','Sharqia','Sohag','South Sinai','Suez') DEFAULT NULL,
   `education` varchar(255) DEFAULT NULL,
   `cv` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -223,9 +273,9 @@ CREATE TABLE `user_details` (
 --
 
 INSERT INTO `user_details` (`id`, `specialization`, `location`, `education`, `cv`, `created_at`, `updated_at`) VALUES
-(1, 'Software Engineer', 'Cairo', 'Bachelor of Science in Computer Science', 'cv_file1.pdf', '2024-05-05 10:34:13', '2024-05-05 10:34:13'),
-(2, 'Network Engineer', 'Alexandria', 'Bachelor of Science in Network Engineering', 'cv_file2.pdf', '2024-05-05 10:34:13', '2024-05-05 10:34:13'),
-(3, 'Data Scientist', 'Giza', 'Master of Science in Data Science', 'cv_file3.pdf', '2024-05-05 10:34:13', '2024-05-05 10:34:13');
+(1, 'Software Engineer', 'Cairo', 'Bachelor of Science in Computer Science', NULL, '2024-05-05 10:34:13', '2024-05-13 18:19:33'),
+(2, 'Network Engineer', 'Alexandria', 'Bachelor of Science in Network Engineering', NULL, '2024-05-05 10:34:13', '2024-05-05 10:34:13'),
+(3, 'Data Scientist', 'Giza', 'Master of Science in Data Science', NULL, '2024-05-05 10:34:13', '2024-05-05 10:34:13');
 
 --
 -- Indexes for dumped tables
@@ -311,7 +361,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -323,31 +373,31 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `job_postings`
 --
 ALTER TABLE `job_postings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `job_requirements`
 --
 ALTER TABLE `job_requirements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `social_links`
 --
 ALTER TABLE `social_links`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_details`

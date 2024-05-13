@@ -18,11 +18,11 @@ trait HandleFileTrait
     {
         switch ($fileType) {
             case 'image':
-                return 'images';
+                return 'img';
             case 'video':
                 return 'videos';
             default:
-                return 'files';
+                return 'cv';
         }
     }
 
@@ -39,10 +39,10 @@ trait HandleFileTrait
         $fileName = pathinfo($file, PATHINFO_FILENAME);
         $fileFullName = $randomName . '_' .  $fileName;
         $path = $folder . '/' . $fileFullName . '.' . $extension;
-        $fullPath = 'assets/' . $path;
-        move_uploaded_file($fileTmp, '../assets/' . $path);
+        // $fullPath = 'assets/' . $path;
+        move_uploaded_file($fileTmp,$path);
 
-        return $fullPath;
+        return $path;
     }
 
     /*

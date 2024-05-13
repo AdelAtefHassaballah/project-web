@@ -15,7 +15,6 @@
         <!-- Navbar -->
         <?php require_once 'components/navbar.php'; ?>
         <!-- Search form -->
-        <!-- Search form -->
         <form method="GET" action="">
             <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
                 <div class="container">
@@ -86,7 +85,7 @@
             <div class="container-xxl py-5">
                 <div class="container">
                     <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job Listing</h1>
-                    <!-- Job List -->
+                    <!-- Job -->
                     <?php require_once 'components/jobList.php'; ?>
                     <a class="btn btn-primary w-50 m-auto btn-hover fs-5" href="">Browse More Jobs</a>
                 </div>

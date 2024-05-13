@@ -8,12 +8,12 @@
 
 <body>
     <div class="container-xxl bg-white p-0">
-        <!-- Spinner Start -->
+        <!-- Spinner -->
         <?php require_once 'components/spinner.php';?>
-        <!-- Navbar Start -->
+        <!-- Navbar -->
         <?php require_once 'components/navbar.php';?>
 
-        <!-- About Start -->
+        <!-- About -->
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="row g-5 align-items-center">
@@ -45,7 +45,7 @@
         </div>
         <!-- About End -->
 
-        <!-- Our Services Start -->
+        <!-- Our Services -->
         <div class="container-xxl py-5 bg-light">
             <div class="container">
                 <div class="row">
@@ -81,7 +81,7 @@
         </div>
         <!-- Our Services End -->
 
-        <!-- Why Choose Us Start -->
+        <!-- Why Choose Us -->
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="row">
@@ -115,10 +115,9 @@
                 </div>
             </div>
         </div>
-        <!-- Why Choose Us End -->
 
 
-        <!-- Footer Start -->
+        <!-- Footer -->
         <?php require_once 'components/footer.php'; ?>
     </div>
     <?php require_once 'components/scripts.php'; ?>

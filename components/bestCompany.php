@@ -1,12 +1,18 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Organization Companies Section
+|--------------------------------------------------------------------------
+*/
+
 class organizationCompanies
 {
     use CrudOperationsTrait;
 
     public function getCompanies()
     {
-        return $sql = $this->getRecord('companies');
-        // return $this->executeQuery($sql);
+         $sql = "SELECT * FROM companies";
+        return $this->executeQuery($sql);
     }
 }
 $organizationCompanies = new organizationCompanies();
@@ -27,9 +33,9 @@ $companies = $organizationCompanies->getCompanies();
                             <h5 class="mb-1"><?php echo $company['name']; ?></h5>
                             <small><?php echo $company['category']; ?></small>
                         </div>
-                        <p><?php echo $company['description']; ?></p>
+                        <p style="max-height: 69px !important; overflow: hidden;"><?php echo $company['description']; ?></p>
                         <div class="position-absolute bottom-0 start-50 translate-middle-x p-2 w-100">
-                            <a class="btn btn-primary btn-sm-hover btn-testimonial" href="company-detail.php?id=<?php echo $company['id'] ?>">View</a>
+                            <a class="btn btn-primary btn-sm-hover btn-testimonial" href="company-detail.php?companyId=<?php echo $company['id'] ?>">View</a>
                         </div>
                     </div>
                 <?php endwhile; ?>

@@ -1,77 +1,6 @@
 <?php
 session_start();
-include("./database/config.php");
-include("./Traits/CrudOperationsTrait.php");
-
-class DatabaseOperations
-{
-    use CrudOperationsTrait;
-
-    private $connection;
-
-    public function __construct($connection)
-    {
-        $this->connection = $connection;
-    }
-
-    public function findJobById($id)
-    {
-        $sql = "SELECT job_postings.*, 
-        companies.name as company_name, companies.id as company_id, companies.location as company_location, companies.image as company_image, companies.category as company_category, companies.description as company_description,
-        users.name as recruiter_name, 
-        job_requirements.title as job_requirement_title, job_requirements.description as job_requirement_description
-        FROM job_postings
-        JOIN companies ON job_postings.company_id = companies.id
-        JOIN users ON job_postings.user_id = users.id
-        LEFT JOIN job_requirements ON job_postings.id = job_requirements.job_posting_id
-        WHERE job_postings.id = $id";
-
-        return $this->executeQuery($sql);
-    }
-
-    public function getCommentsByJobId($jobId)
-    {
-        $sql = "SELECT comments.*, users.name AS user_name 
-                FROM comments 
-                INNER JOIN users ON comments.user_id = users.id 
-                WHERE job_posting_id = $jobId AND comments.status = 1 
-                ORDER BY comments.created_at DESC";
-        return $this->executeQuery($sql);
-    }
-
-
-    public function addComment($content, $jobPostingId, $userId)
-    {
-        $sql = "INSERT INTO comments (content, job_posting_id, user_id) VALUES ('$content', $jobPostingId, $userId)";
-        return $this->executeQuery($sql);
-    }
-}
-
-if (!isset($_REQUEST['id'])) {
-    header('location: index.php');
-    exit;
-}
-
-$id = $_GET['id'];
-$databaseOperations = new DatabaseOperations($conn);
-$jobData = $databaseOperations->findJobById($id);
-$comments = $databaseOperations->getCommentsByJobId($id);
-
-if (!$jobData) {
-    header('location: index.php');
-    exit;
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comment'])) {
-    $content = $_POST['comment'];
-    $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
-    $result = $databaseOperations->addComment($content, $id, $userId);
-    if ($result) {
-        // Refresh the page or show success message
-        header("Refresh:0");
-    }
-}
-
+include("controller/DetailsController.php");
 ?>
 
 <!DOCTYPE html>
@@ -84,18 +13,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comment'])) {
 
 <body>
     <div class="container-xxl bg-white p-0">
-        <!-- Spinner Start -->
+        <!-- Spinner -->
         <?php require_once 'components/spinner.php'; ?>
-        <!-- Navbar Start -->
+        <!-- Navbar -->
         <?php require_once 'components/navbar.php'; ?>
 
 
-        <!-- Job Detail Start -->
+        <!-- Job Detail -->
         <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="container">
                 <div class="row gy-5 gx-4">
                     <div class="col-lg-8">
-                        <?php if ($jobData) : ?>
+                        <?php if (isset($jobData)) : ?>
                             <?php foreach ($jobData as $job) : ?>
                                 <div class="d-flex align-items-center mb-5">
                                     <img class="flex-shrink-0 img-fluid border rounded" src="<?php echo $job['image']; ?>" alt="" style="width: 80px; height: 80px;">
@@ -173,18 +102,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comment'])) {
                             <h4 class="mb-4">Company Detail</h4>
                             <img class="flex-shrink-0 img-fluid border rounded mb-2" src="<?php echo $job['company_image']; ?>" alt="" style="width: 80px; height: 80px;">
                             <br>
-                            <a class="m-0 " href="company-detail.php?id=<?php echo $job['company_id']; ?>"><span class="fw-bold text-primary">Name:</span> <?php echo $job['company_name']; ?></a>
+                            <a class="m-0 " href="company-detail.php?companyId=<?php echo $job['company_id']; ?>"><span class="fw-bold text-primary">Name:</span> <?php echo $job['company_name']; ?></a>
                             <p class="m-0"><span class="fw-bold text-primary">Company Description:</span> <?php echo $job['company_description']; ?></p>
                             <p class="m-0"><span class="fw-bold text-primary">Company Location:</span> <?php echo $job['company_location']; ?></p>
                             <p class="m-0"><span class="fw-bold text-primary">Company Field:</span> <?php echo $job['company_category']; ?></p>
                         </div>
                     </div>
                 </div>
+                <!-- Company Registration Form -->
+                <?php if (isset($user_details) && $user_details['role'] !== 'recruiter') {
+                    require "components/application-form.php";
+                } ?>
+                <!-- Company Applying -->
+                <?php if (isset($userId) && $userId == $jobDataArray['user_id']) {
+                    require "components/apply-details.php";
+                } ?>
             </div>
         </div>
-        <!-- Footer Start -->
-        <?php require_once 'components/footer.php'; ?>
     </div>
+    <!-- Footer -->
+    <?php require_once 'components/footer.php'; ?>
     <?php require_once 'components/scripts.php'; ?>
 </body>
 

@@ -1,3 +1,9 @@
+<!--
+|--------------------------------------------------------------------------
+| Footer Section
+|--------------------------------------------------------------------------
+-->
+
 <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container py-5">
         <div class="row g-5">
@@ -31,6 +37,11 @@
                     <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
                     <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
                 </div>
+                <div class="pt-2">
+                    <h5 class="text-white mb-4">Join Us</h5>
+                    <a class="btn btn-link text-white-50" href="join-us.php">Join Our Publishers</a>
+                </div>
+
             </div>
         </div>
     </div>
@@ -52,5 +63,10 @@
     </div>
 </div>
 
-<!-- Back to Top -->
+<!--
+|--------------------------------------------------------------------------
+| Back to Top Button
+|--------------------------------------------------------------------------
+-->
+
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>

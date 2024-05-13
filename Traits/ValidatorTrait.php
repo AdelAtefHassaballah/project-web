@@ -2,38 +2,40 @@
 
 trait ValidatorTrait
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Validate Request Data Function
-    |--------------------------------------------------------------------------
-    */
-    public function validateRequestData($request, $rules)
-    {
-        $validator = $this->makeValidator($request, $rules);
+/*
+|--------------------------------------------------------------------------
+| Validate Request Data Function
+|--------------------------------------------------------------------------
+*/
+public function validateRequestData($request, $rules)
+{
+    $errors = $this->makeValidator($request, $rules)->errors;
 
-        if ($validator->fails) {
-            return json_encode(['error' => $validator->errors], 400);
-        }
-        return null;
+    if (!empty($errors)) {
+        return $errors;
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Make Validator Function
-    |--------------------------------------------------------------------------
-    */
-    private function makeValidator($data, $rules)
-    {
-        $validator = new stdClass();
-        $validator->errors = [];
-        foreach ($rules as $field => $rule) {
-            if (!isset($data[$field]) || !$this->validateField($data[$field], $rule)) {
-                $validator->errors[$field] = "The $field field is invalid.";
-            }
+    return null;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Make Validator Function
+|--------------------------------------------------------------------------
+*/
+private function makeValidator($data, $rules)
+{
+    $validator = new stdClass();
+    $validator->errors = [];
+
+    foreach ($rules as $field => $rule) {
+        if (!isset($data[$field]) || !$this->validateField($data[$field], $rule)) {
+            $validator->errors[$field] = "The $field field is invalid.";
         }
-        $validator->fails = !empty($validator->errors);
-        return $validator;
     }
+
+    return $validator;
+}
 
     /*
     |--------------------------------------------------------------------------
